@@ -1,0 +1,11 @@
+
+RewriteEngine on
+
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteRule ^(.*)/$ /$1 [L,R=301]
+# Если запрашиваемая в URL директория или файл существуют обращаемся к ним напрямую
+
+# Если нет - перенаправляем запрос на index.php
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteRule ^ index.php [L]
