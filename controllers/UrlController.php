@@ -30,6 +30,11 @@ class UrlController extends Controller
      */
     public function actionIndex()
     {
+        if (Yii::$app->user->isGuest === true)
+        {
+            return $this->redirect(Url::to(['site/login'], true));
+        }
+
         $model = new SearchForm();
 
         if (Yii::$app->request->isPost === true)
@@ -54,7 +59,6 @@ class UrlController extends Controller
                 $search->link('user', Yii::$app->user->identity);
             });
         }
-
 
         $searches = Search::find()
             ->joinWith('user')
